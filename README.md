@@ -1,2 +1,2 @@
 # University
-Little projects I did while studying on university
+Little projects I did while studying
