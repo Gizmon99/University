@@ -10,7 +10,8 @@ from torch.utils.data import DataLoader
 from modcloth import ModCloth
 from model import SFNet
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")
 
 
 def main(args):
