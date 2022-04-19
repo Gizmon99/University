@@ -17,19 +17,19 @@ def main(args):
 
     data_config = load_config_from_json(args.data_config_path)
     model_config = load_config_from_json(
-        os.path.join(args.saved_model_path, "config.jsonl")
+        os.path.join(args.model, "config.jsonl")
     )
 
     # initialize model
     model = SFNet(model_config["sfnet"])
     model = model.to(device)
 
-    if not os.path.exists(args.saved_model_path):
-        raise FileNotFoundError(args.saved_model_path)
+    if not os.path.exists(args.model):
+        raise FileNotFoundError(args.model)
 
-    checkpoint = os.path.join(args.saved_model_path, args.checkpoint)
+    checkpoint = os.path.join(args.model, args.checkpoint)
     model.load_state_dict(torch.load(checkpoint, map_location="cpu"))
-    print("Model loaded from %s" % (args.saved_model_path))
+    print("Model loaded from %s" % (args.model))
 
     # tracker to keep true labels and predicted probabilitites
     target_tracker = []
@@ -80,7 +80,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--data_config_path", type=str, default="configs/data.jsonnet")
-    parser.add_argument("--saved_model_path", type=str, required=True)
+    parser.add_argument("--model", type=str, required=True)
     parser.add_argument("--checkpoint", type=str, default="E20.pytorch")
 
     args = parser.parse_args()

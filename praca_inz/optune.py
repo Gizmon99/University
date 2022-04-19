@@ -17,8 +17,9 @@ from torch.utils.data import DataLoader
 from modcloth import ModCloth
 from model import SFNet
 
-
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+torch.manual_seed(0)
+
 
 data_config = load_config_from_json("configs/data.jsonnet")
 model_config = load_config_from_json("configs/model.jsonnet")
@@ -31,8 +32,11 @@ for split in splits:
 
 def objective(trial):
     embedding_dim = trial.suggest_int("embedding_dim", 5, 20)
-    activation = trial.suggest_categorical("activation", ["relu", "tanh"])
-    dropout = trial.suggest_int("dropout", 0.1, 0.3)
+    dropout = trial.suggest_float("dropout", 0.0, 0.3)
+    # num_item_emb = trial.suggest_int("num_item_emb", 1200, 1500)
+    # num_category_emb = trial.suggest_int("num_category_emb", 5, 12)
+    # num_cup_size_emb = trial.suggest_int("num_cup_size_emb", 7, 15)
+    # num_user_emb = trial.suggest_int("num_user_emb", 45000, 50000)
 
     dicto = {"embedding_dim": embedding_dim,
         "num_item_emb" : 1378,
@@ -44,20 +48,25 @@ def objective(trial):
         "user_pathway": [256, 128, 64],
         "item_pathway": [256, 128, 64],
         "combined_pathway": [256, 128, 64, 16],
-        "activation": activation,
+        "activation": "relu",
         "dropout": dropout,
         "num_targets": 3}
     
     model = SFNet(dicto)
+    model = model.to(device)
 
-    loss_criterion = torch.nn.CrossEntropyLoss(reduction="mean")
+    loss_criterion = torch.nn.NLLLoss(reduction="mean")
+
+    lr = trial.suggest_float("lr", 0.0001, 0.005)
+    weight_decay = trial.suggest_float("weight_decay", 0.00001, 0.005)
 
     optimizer = torch.optim.Adam(
         model.parameters(),
-        lr=model_config["trainer"]["optimizer"]["lr"],
-        weight_decay=model_config["trainer"]["optimizer"]["weight_decay"],
+        lr=lr,
+        weight_decay=weight_decay,
     )
 
+    m = torch.nn.LogSoftmax(dim=1)
     step = 0
     tensor = torch.cuda.FloatTensor if torch.cuda.is_available() else torch.Tensor
 
@@ -91,7 +100,7 @@ def objective(trial):
                 logits, pred_probs = model(batch)
 
                 # loss calculation
-                loss = loss_criterion(logits, batch["fit"])
+                loss = loss_criterion(m(logits), batch["fit"])
 
                 # backward + optimization
                 if split == "train":
@@ -138,19 +147,18 @@ def objective(trial):
                 target_tracker, pred_tracker
             )
 
-        trial.report([precision, recall, f1_score, accuracy, auc], epoch)
+    return f1_score, accuracy, auc
 
-    return [precision, recall, f1_score, accuracy, auc]
 
 if __name__ == "__main__":
-    study = optuna.create_study(direction="maximize")
-    study.optimize(objective, n_trials=10)
+    study = optuna.create_study(directions=["maximize", "maximize", "maximize"])
+    study.optimize(objective, n_trials=200)
 
-    print("Best trial:")
-    trial = study.best_trial
+    trials = study.best_trials
+    print("Best trials: ", trials)
 
-    print("  Value: ", trial.value)
-
-    print("  Params: ")
-    for key, value in trial.params.items():
-        print("    {}: {}".format(key, value))
+    for c, trial in enumerate(trials):
+        print("Trial nr: ", c, ", values: ", trial.values)
+        print("Params:")
+        for key, value in trial.params.items():
+            print(" {}: {},".format(key, value))

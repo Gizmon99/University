@@ -15,6 +15,7 @@ from modcloth import ModCloth
 from model import SFNet
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+torch.manual_seed(0)
 
 
 def main(args):
@@ -56,6 +57,7 @@ def main(args):
         writer.add_text("args", str(args))
 
     loss_criterion = torch.nn.CrossEntropyLoss(reduction="mean")
+    # m = torch.nn.LogSoftmax(dim=1)
 
     optimizer = torch.optim.Adam(
         model.parameters(),
@@ -96,6 +98,7 @@ def main(args):
                 logits, pred_probs = model(batch)
 
                 # loss calculation
+                # loss = loss_criterion(m(logits), batch["fit"])
                 loss = loss_criterion(logits, batch["fit"])
 
                 # backward + optimization
