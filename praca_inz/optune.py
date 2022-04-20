@@ -55,7 +55,8 @@ def objective(trial):
     model = SFNet(dicto)
     model = model.to(device)
 
-    loss_criterion = torch.nn.NLLLoss(reduction="mean")
+    loss_criterion = torch.nn.CrossEntropyLoss(reduction="mean")
+    # m = torch.nn.LogSoftmax(dim=1)
 
     lr = trial.suggest_float("lr", 0.0001, 0.005)
     weight_decay = trial.suggest_float("weight_decay", 0.00001, 0.005)
@@ -66,7 +67,6 @@ def objective(trial):
         weight_decay=weight_decay,
     )
 
-    m = torch.nn.LogSoftmax(dim=1)
     step = 0
     tensor = torch.cuda.FloatTensor if torch.cuda.is_available() else torch.Tensor
 
@@ -100,7 +100,8 @@ def objective(trial):
                 logits, pred_probs = model(batch)
 
                 # loss calculation
-                loss = loss_criterion(m(logits), batch["fit"])
+                loss = loss_criterion(logits, batch["fit"])
+                # loss = loss_criterion(m(logits), batch["fit"])
 
                 # backward + optimization
                 if split == "train":

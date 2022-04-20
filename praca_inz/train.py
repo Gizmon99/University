@@ -56,8 +56,9 @@ def main(args):
         writer.add_text("model", str(model))
         writer.add_text("args", str(args))
 
-    loss_criterion = torch.nn.CrossEntropyLoss(reduction="mean")
-    # m = torch.nn.LogSoftmax(dim=1)
+    # loss_criterion = torch.nn.CrossEntropyLoss(reduction="mean")
+    loss_criterion = torch.nn.NLLLoss(reduction="mean")
+    m = torch.nn.LogSoftmax(dim=1)
 
     optimizer = torch.optim.Adam(
         model.parameters(),
@@ -98,8 +99,8 @@ def main(args):
                 logits, pred_probs = model(batch)
 
                 # loss calculation
-                # loss = loss_criterion(m(logits), batch["fit"])
-                loss = loss_criterion(logits, batch["fit"])
+                loss = loss_criterion(m(logits), batch["fit"])
+                # loss = loss_criterion(logits, batch["fit"])
 
                 # backward + optimization
                 if split == "train":
