@@ -45,7 +45,7 @@ This new representation is fed to the top layer skip connection block.
 
 3. The original data is quite messy with quite a bit of missing values (NaNs). It is required to go through the `data_preparation.ipynb` notebook to create the working data. The notebook also provides instruction on creating the train/validation/test splits. 
 
-4. Set data, model and training configurations by appropriately modifying the `jsonnet` files under `configs/` directory. If You don't know what hyperparameters to choose, let the script do it for You, just run the optune.py script, using the following command:
+4. Set data, model and training configurations by appropriately modifying the `jsonnet` files under `configs/` directory. If You don't know what hyperparameters to choose, let the script do it for You, just run the optune.py script using the following command:
 ```
    python optune.py
 ```
@@ -76,11 +76,11 @@ HareeshBahuleyan's model's score:
 |:--------:|:-------:|:--------:|:--------:|:-----:|
 | 0.447    | 0.354   |   0.314  | 0.693    | 0.726 | 
 
-*Note*: The metrics reported here are macro-average values. 
-
 Updated model's score:
 
 #TODO
+
+*Note*: The metrics reported here are macro-average values. 
 
 ## Acknowledgements
 Thanks to Rishab Mishra for making the datasets used here publicly available on [Kaggle](https://www.kaggle.com/rmisra/clothing-fit-dataset-for-size-recommendation). The main skeleton structure and the training process of the model is highly inspired by [HareeshBahuleyan](https://github.com/HareeshBahuleyan/size-fit-net)
