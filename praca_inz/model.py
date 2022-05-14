@@ -116,7 +116,7 @@ class SFNet(nn.Module):
         combined_representation = self.combined_blocks(combined_representation)
 
         # Additional pooling layer
-        combined_representation = self.pooler(combined_representation)
+        # combined_representation = self.pooler(combined_representation)
 
         # Output layer of logits
         logits = self.hidden2output(combined_representation)
