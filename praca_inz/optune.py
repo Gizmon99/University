@@ -33,10 +33,6 @@ for split in splits:
 def objective(trial):
     embedding_dim = trial.suggest_int("embedding_dim", 5, 20)
     dropout = trial.suggest_float("dropout", 0.0, 0.3)
-    # num_item_emb = trial.suggest_int("num_item_emb", 1200, 1500)
-    # num_category_emb = trial.suggest_int("num_category_emb", 5, 12)
-    # num_cup_size_emb = trial.suggest_int("num_cup_size_emb", 7, 15)
-    # num_user_emb = trial.suggest_int("num_user_emb", 45000, 50000)
 
     dicto = {"embedding_dim": embedding_dim,
         "num_item_emb" : 1378,
