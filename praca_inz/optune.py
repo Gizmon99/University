@@ -39,7 +39,7 @@ def objective(trial):
         "num_category_emb" : 7,
         "num_cup_size_emb" : 12,
         "num_user_emb" : 47958,
-        "num_user_numeric": 5,
+        "num_user_numeric": 6,
         "num_item_numeric": 2,
         "user_pathway": [256, 128, 64],
         "item_pathway": [256, 128, 64],
@@ -149,7 +149,7 @@ def objective(trial):
 
 if __name__ == "__main__":
     study = optuna.create_study(directions=["maximize", "maximize", "maximize"])
-    study.optimize(objective, n_trials=200)
+    study.optimize(objective, n_trials=100)
 
     trials = study.best_trials
     print("Best trials: ", trials)

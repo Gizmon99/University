@@ -85,11 +85,8 @@ class SFNet(nn.Module):
             self.combined_blocks.append(nn.Dropout(p=config["dropout"]))
         self.combined_blocks = nn.Sequential(*self.combined_blocks)
 
-        # Pooling layer
-        self.pooler = nn.MaxPool1d(2, stride=1)
-
         # Linear transformation from last hidden layer to output
-        self.hidden2output = nn.Linear(self.combined_pathway[-1] - 1, config["num_targets"])
+        self.hidden2output = nn.Linear(self.combined_pathway[-1], config["num_targets"])
 
     def forward(self, batch_input):
 

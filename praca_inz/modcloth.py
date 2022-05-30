@@ -46,6 +46,7 @@ class ModCloth(Dataset):
                         record["bra_size"],
                         record["height"],
                         record["shoe_size"],
+                        # record["bust"],
                     ],
                     "item_id": record["item_id"],
                     "category": record["category"],
