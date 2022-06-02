@@ -1,13 +1,13 @@
 {   
     "sfnet":{
-        "embedding_dim": 10,
+        "embedding_dim": 20,
 
         "num_item_emb" : 1378,
         "num_category_emb" : 7,
         "num_cup_size_emb" : 12,
         "num_user_emb" : 47958,
 
-        "num_user_numeric": 5, // number of user features which are numeric
+        "num_user_numeric": 6, // number of user features which are numeric
         "num_item_numeric": 2, // number of item features which are numeric
 
         "user_pathway": [256, 128, 64], //series of transformations for the use embeddings + features
@@ -15,7 +15,7 @@
         "combined_pathway": [256, 128, 64, 16], //series of transformations for the item embeddings + features
 
         "activation": "relu", // relu or tanh
-        "dropout": 0.041130159544709145, 
+        "dropout": 0.05993267332431601, 
 
         "num_targets": 3, // small, fit or large
     },
@@ -23,9 +23,9 @@
         "num_epochs": 20,
         "batch_size": 128,
         "optimizer": {
-          "lr": 0.0013443990763360452,
+          "lr": 0.0031823442104148445,
           "type": "adam",
-          "weight_decay": 0.00015951313040777533,
+          "weight_decay": 0.000245952717449161,
         }
     },
     "logging": {
