@@ -144,11 +144,11 @@ def objective(trial):
                 target_tracker, pred_tracker
             )
 
-    return f1_score, accuracy, auc
+    return accuracy
 
 
 if __name__ == "__main__":
-    study = optuna.create_study(directions=["maximize", "maximize", "maximize"])
+    study = optuna.create_study(directions=["maximize"])
     study.optimize(objective, n_trials=100)
 
     trials = study.best_trials

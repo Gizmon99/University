@@ -36,9 +36,15 @@ def main(args):
     pred_tracker = []
 
     print("Preparing test data ...")
-    dataset = ModCloth(data_config, split="test")
+    dataset = ModCloth(data_config, split="full")
+    k_data = []
+
+    for line in dataset:
+        k_data.append(line)
+    
+    
     data_loader = DataLoader(
-        dataset=dataset,
+        dataset=k_data[66232:],
         batch_size=model_config["trainer"]["batch_size"],
         shuffle=False,
     )

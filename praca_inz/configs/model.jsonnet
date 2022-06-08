@@ -1,6 +1,6 @@
 {   
     "sfnet":{
-        "embedding_dim": 20,
+        "embedding_dim": 12,
 
         "num_item_emb" : 1378,
         "num_category_emb" : 7,
@@ -15,7 +15,7 @@
         "combined_pathway": [256, 128, 64, 16], //series of transformations for the item embeddings + features
 
         "activation": "relu", // relu or tanh
-        "dropout": 0.05993267332431601, 
+        "dropout": 0.001642333551208903, 
 
         "num_targets": 3, // small, fit or large
     },
@@ -23,9 +23,9 @@
         "num_epochs": 20,
         "batch_size": 128,
         "optimizer": {
-          "lr": 0.0031823442104148445,
+          "lr": 0.0007264161872414618,
           "type": "adam",
-          "weight_decay": 0.000245952717449161,
+          "weight_decay": 0.000015227852970043862,
         }
     },
     "logging": {
