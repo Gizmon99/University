@@ -96,8 +96,8 @@ def display_pca_scatterplot(ids, embeddings, category, limit=50):
 
 
     plot_figure = go.Figure(data = data, layout = layout)
-    plot_figure.write_image("images/TSNE_user_id_40000_bra_size_random.png")
-    plot_figure.show()
+    plot_figure.write_image("images/TSNE_cup_size_40000_bra_size_random.png")
+    # plot_figure.show()
 
 
 def main(args):
@@ -135,7 +135,7 @@ def main(args):
     # user_values = {thing.detach().numpy().tolist(): model.category_embedding(thing).detach().numpy().tolist() for batch in data_loader for thing in batch['category']}
 
     print(len(category), len(set(category.values())))
-    display_pca_scatterplot(list(user_values.keys()), list(user_values.values()), category, min(10000,len(user_values)))
+    display_pca_scatterplot(list(user_values.keys()), list(user_values.values()), category, min(40000,len(user_values)))
 
 if __name__ == "__main__":
 
