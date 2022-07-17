@@ -130,6 +130,14 @@ def main(args):
 
     user_values = {thing.detach().numpy().tolist(): model.user_embedding(thing).detach().numpy().tolist() for batch in data_loader for thing in batch['user_id']}
     category = {thing.detach().numpy().tolist(): comp[2].detach().numpy().tolist() for batch in data_loader for thing, comp in zip(batch['user_id'], batch['user_numeric'])}
+    things = {a[2].detach().numpy().tolist() for batch in data_loader for a in batch['user_numeric']}
+
+    pprinter = {thing: n for n, thing in enumerate(things)}
+    largest = {pprinter[thing]: 0 for thing in things}
+    for batch in data_loader:
+        for thing in batch["user_numeric"]:
+            largest[pprinter[thing[2].detach().numpy().tolist()]] += 1
+    print(largest)
 
     # user_values = {thing.detach().numpy().tolist(): model.cup_size_embedding(thing).detach().numpy().tolist() for batch in data_loader for thing in batch['cup_size']}
 
@@ -137,16 +145,17 @@ def main(args):
     # category = {thing.detach().numpy().tolist(): comp[1].detach().numpy().tolist() for batch in data_loader for thing, comp in zip(batch['item_id'], batch['item_numeric'])}
 
     # user_values = {thing.detach().numpy().tolist(): model.category_embedding(thing).detach().numpy().tolist() for batch in data_loader for thing in batch['category']}
+    print(things)
 
     print(len(category), len(set(category.values())))
-    for batch in data_loader:
-        for k, v in batch.items():
-            if k == "user_id":
-                for one in v:
-                    print("v:", one)
-                    print("embed:", model.user_embedding(one))
-                    model.user_embedding.weight.data[one] += torch.tensor([0.1, 0.1, 0.1, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
-                    print("lmao?:", model.user_embedding(one))
+    # for batch in data_loader:
+    #     for k, v in batch.items():
+    #         if k == "user_id":
+    #             for one in v:
+    #                 print("v:", one)
+    #                 print("embed:", model.user_embedding(one))
+    #                 model.user_embedding.weight.data[one] += torch.tensor([0.1, 0.1, 0.1, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+    #                 print("lmao?:", model.user_embedding(one))
     # display_pca_scatterplot(list(user_values.keys()), list(user_values.values()), category, min(40000,len(user_values)))
 
 if __name__ == "__main__":
