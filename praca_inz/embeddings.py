@@ -2,6 +2,7 @@ import os
 import argparse
 import torch
 import numpy as np
+import torch
 
 from utils import compute_metrics
 from utils import to_var, load_config_from_json
@@ -18,6 +19,7 @@ from random import sample
 
 def display_pca_scatterplot(ids, embeddings, category, limit=50):
 
+    print(limit)
     # three_dim = PCA(random_state=0, n_components=2).fit_transform(embeddings)
     three_dim = TSNE(random_state=0, n_components=2, learning_rate='auto', init='random').fit_transform(np.array(embeddings))
 
@@ -96,7 +98,7 @@ def display_pca_scatterplot(ids, embeddings, category, limit=50):
 
 
     plot_figure = go.Figure(data = data, layout = layout)
-    plot_figure.write_image("images/TSNE_cup_size_40000_bra_size_random.png")
+    plot_figure.write_image("images/TSNE_user_id_40000_bra_size_random_checkpoint_1.png")
     # plot_figure.show()
 
 
@@ -123,6 +125,7 @@ def main(args):
         shuffle=False,
     )
     # waist, hips, bra_size, height, shoe_size
+    # size, quality
 
 
     user_values = {thing.detach().numpy().tolist(): model.user_embedding(thing).detach().numpy().tolist() for batch in data_loader for thing in batch['user_id']}
@@ -131,11 +134,20 @@ def main(args):
     # user_values = {thing.detach().numpy().tolist(): model.cup_size_embedding(thing).detach().numpy().tolist() for batch in data_loader for thing in batch['cup_size']}
 
     # user_values = {thing.detach().numpy().tolist(): model.item_embedding(thing).detach().numpy().tolist() for batch in data_loader for thing in batch['item_id']}
+    # category = {thing.detach().numpy().tolist(): comp[1].detach().numpy().tolist() for batch in data_loader for thing, comp in zip(batch['item_id'], batch['item_numeric'])}
 
     # user_values = {thing.detach().numpy().tolist(): model.category_embedding(thing).detach().numpy().tolist() for batch in data_loader for thing in batch['category']}
 
     print(len(category), len(set(category.values())))
-    display_pca_scatterplot(list(user_values.keys()), list(user_values.values()), category, min(40000,len(user_values)))
+    for batch in data_loader:
+        for k, v in batch.items():
+            if k == "user_id":
+                for one in v:
+                    print("v:", one)
+                    print("embed:", model.user_embedding(one))
+                    model.user_embedding.weight.data[one] += torch.tensor([0.1, 0.1, 0.1, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+                    print("lmao?:", model.user_embedding(one))
+    # display_pca_scatterplot(list(user_values.keys()), list(user_values.values()), category, min(40000,len(user_values)))
 
 if __name__ == "__main__":
 

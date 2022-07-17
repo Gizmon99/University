@@ -52,7 +52,6 @@ def objective(trial):
     model = model.to(device)
 
     loss_criterion = torch.nn.CrossEntropyLoss(reduction="mean")
-    # m = torch.nn.LogSoftmax(dim=1)
 
     lr = trial.suggest_float("lr", 0.0001, 0.005)
     weight_decay = trial.suggest_float("weight_decay", 0.00001, 0.005)
@@ -97,7 +96,6 @@ def objective(trial):
 
                 # loss calculation
                 loss = loss_criterion(logits, batch["fit"])
-                # loss = loss_criterion(m(logits), batch["fit"])
 
                 # backward + optimization
                 if split == "train":

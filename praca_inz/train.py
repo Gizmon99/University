@@ -57,9 +57,8 @@ def main(args):
         writer.add_text("args", str(args))
 
     loss_criterion = torch.nn.CrossEntropyLoss(reduction="mean")
-    # loss_criterion = torch.nn.NLLLoss(reduction="mean")
-    # m = torch.nn.LogSoftmax(dim=1)
 
+    # SGD?
     optimizer = torch.optim.Adam(
         model.parameters(),
         lr=model_config["trainer"]["optimizer"]["lr"],
@@ -99,17 +98,18 @@ def main(args):
                 logits, pred_probs = model(batch)
 
                 # loss calculation
-                # loss = loss_criterion(m(logits), batch["fit"])
                 loss = loss_criterion(logits, batch["fit"])
 
                 # backward + optimization
                 if split == "train":
                     optimizer.zero_grad()
                     loss.backward()
+                    # something here?
+
                     optimizer.step()
                     step += 1
 
-                # bookkeepeing
+                # bookkeeping
                 loss_tracker["Total Loss"] = torch.cat(
                     (loss_tracker["Total Loss"], loss.view(1))
                 )
