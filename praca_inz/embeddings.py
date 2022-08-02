@@ -145,18 +145,29 @@ def main(args):
     # category = {thing.detach().numpy().tolist(): comp[1].detach().numpy().tolist() for batch in data_loader for thing, comp in zip(batch['item_id'], batch['item_numeric'])}
 
     # user_values = {thing.detach().numpy().tolist(): model.category_embedding(thing).detach().numpy().tolist() for batch in data_loader for thing in batch['category']}
-    print(things)
+    # print(things)
 
-    print(len(category), len(set(category.values())))
+    # print(len(category), len(set(category.values())))
     # for batch in data_loader:
     #     for k, v in batch.items():
     #         if k == "user_id":
     #             for one in v:
     #                 print("v:", one)
+    #                 dupa1 = model.user_embedding.weight.data[one].detach().clone()
     #                 print("embed:", model.user_embedding(one))
-    #                 model.user_embedding.weight.data[one] += torch.tensor([0.1, 0.1, 0.1, 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+    #                 print("embed:", dupa1)
+    #                 print("embed:", model.user_embedding.weight.data[one])
+    #                 model.user_embedding.weight.data[one] = dupa1/3
     #                 print("lmao?:", model.user_embedding(one))
+    #                 print("embed:", len(dupa1))
+    #                 print("embed:", dupa1/3)
+    #                 print("list: ", model.user_embedding.weight.data[one] - dupa1)
+    #         break
+    #     break
     # display_pca_scatterplot(list(user_values.keys()), list(user_values.values()), category, min(40000,len(user_values)))
+    v1 = torch.tensor([1, 1, 1, 1, 1, 1])
+    v2 = torch.tensor([2, 3, 4, 4, 5, 6])
+    print(v1-v2, sum(v1-v2), sum(v1-v2)**2, v1*1/3*sum(v1-v2)**2)
 
 if __name__ == "__main__":
 

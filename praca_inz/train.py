@@ -4,10 +4,11 @@ import jsonlines
 import argparse
 import torch
 import numpy as np
+import random
 
 from collections import defaultdict, OrderedDict
 from tensorboardX import SummaryWriter
-from utils import compute_metrics
+from utils import compute_metrics, vector_distance 
 from utils import to_var, load_config_from_json
 
 from torch.utils.data import DataLoader
@@ -16,6 +17,7 @@ from model import SFNet
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 torch.manual_seed(0)
+random.seed(0)
 
 
 def main(args):
@@ -65,6 +67,18 @@ def main(args):
         weight_decay=model_config["trainer"]["optimizer"]["weight_decay"],
     )
 
+    # Embeddings preparation
+    dataset = ModCloth(data_config, split="full")
+
+    data_loader = DataLoader(
+        dataset=dataset,
+        batch_size=model_config["trainer"]["batch_size"],
+        shuffle=False,
+    )
+    
+    category = {thing.detach().numpy().tolist(): comp[2].detach().numpy().tolist() for batch in data_loader for thing, comp in zip(batch['user_id'], batch['user_numeric'])}
+
+
     step = 0
     tensor = torch.cuda.FloatTensor if torch.cuda.is_available() else torch.Tensor
 
@@ -89,6 +103,8 @@ def main(args):
                 pred_tracker = []
 
             for iteration, batch in enumerate(data_loader):
+                
+
 
                 for k, v in batch.items():
                     if torch.is_tensor(v):
@@ -102,12 +118,39 @@ def main(args):
 
                 # backward + optimization
                 if split == "train":
+                    problems = {thing.detach().numpy().tolist(): model.user_embedding.weight.data[thing].detach().clone() for batch in data_loader for thing in batch['user_id']}
                     optimizer.zero_grad()
-                    loss.backward()
                     # something here?
-
+                    
+                    loss.backward()
                     optimizer.step()
                     step += 1
+                    problems_2 = {thing.detach().numpy().tolist(): model.user_embedding.weight.data[thing].detach().clone() for batch in data_loader for thing in batch['user_id']}
+                    lucky_number = random.choice(list(category.values()))
+                    # lucky_number = random.choice([0, 1])
+
+                    mass_center = torch.zeros(len(problems[list(problems.keys())[0]]))
+                    quantity = 0
+
+                    for id in list(category.keys()):
+                        if category[id] == lucky_number:
+                            mass_center += model.user_embedding.weight.data[id].detach().clone()
+                            quantity += 1
+                    
+                    mass_center = mass_center/quantity
+
+                    for id in list(problems.keys()):
+                        if category[id] != lucky_number:
+                            dist1 = vector_distance(problems[id], mass_center)
+                            dist2 = vector_distance(problems_2[id], mass_center)
+                            diff = (problems_2[id] - problems[id]) * 1/3
+                            if dist1 > dist2:
+                                diff = diff * -1 * dist1/dist2
+                            else:
+                                diff = diff * dist2/dist1
+
+                            model.user_embedding.weight.data[id] += diff                            
+                        
 
                 # bookkeeping
                 loss_tracker["Total Loss"] = torch.cat(

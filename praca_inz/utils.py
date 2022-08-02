@@ -37,3 +37,7 @@ def compute_metrics(target, pred_probs):
     auc = metrics.roc_auc_score(target, pred_probs, average="macro", multi_class="ovr")
 
     return precision, recall, f1_score, accuracy, auc
+
+
+def vector_distance(v1, v2):
+    return sum(v1-v2)**2
