@@ -118,26 +118,24 @@ def main(args):
 
                 # backward + optimization
                 if split == "train":
-                    problems = {thing.detach().numpy().tolist(): model.user_embedding.weight.data[thing].detach().clone() for batch in data_loader for thing in batch['user_id']}
+                    problems = {thing.cpu().detach().numpy().tolist(): model.user_embedding.weight.data[thing].detach().clone() for thing in batch["user_id"]}
                     optimizer.zero_grad()
-                    # something here?
                     
                     loss.backward()
                     optimizer.step()
                     step += 1
-                    problems_2 = {thing.detach().numpy().tolist(): model.user_embedding.weight.data[thing].detach().clone() for batch in data_loader for thing in batch['user_id']}
+                    problems_2 = {thing.cpu().detach().numpy().tolist(): model.user_embedding.weight.data[thing].detach().clone() for thing in batch["user_id"]}
                     lucky_number = random.choice(list(category.values()))
-                    # lucky_number = random.choice([0, 1])
 
-                    mass_center = torch.zeros(len(problems[list(problems.keys())[0]]))
-                    quantity = 0
-
-                    for id in list(category.keys()):
-                        if category[id] == lucky_number:
-                            mass_center += model.user_embedding.weight.data[id].detach().clone()
-                            quantity += 1
-                    
-                    mass_center = mass_center/quantity
+                    # mass_center = torch.zeros(len(problems[list(problems.keys())[0]]))
+                    # mass_center = mass_center.to(device)
+                    # quantity = 0
+                    points = [model.user_embedding.weight.data[id].detach().clone() for id in list(category.keys()) if category[id] == lucky_number]
+                    # for id in list(category.keys()):
+                    #     if category[id] == lucky_number:
+                    #         mass_center += model.user_embedding.weight.data[id].detach().clone()
+                    #         quantity += 1
+                    mass_center = sum(points)/len(points)
 
                     for id in list(problems.keys()):
                         if category[id] != lucky_number:
@@ -145,13 +143,12 @@ def main(args):
                             dist2 = vector_distance(problems_2[id], mass_center)
                             diff = (problems_2[id] - problems[id]) * 1/3
                             if dist1 > dist2:
-                                diff = diff * -1 * dist1/dist2
-                            else:
-                                diff = diff * dist2/dist1
+                                diff = diff * -1 # * dist1/dist2
+                            # else:
+                            #     diff = diff * dist2/dist1
 
                             model.user_embedding.weight.data[id] += diff                            
-                        
-
+                    
                 # bookkeeping
                 loss_tracker["Total Loss"] = torch.cat(
                     (loss_tracker["Total Loss"], loss.view(1))
