@@ -141,14 +141,11 @@ def main(args):
                         if category[id] != lucky_number:
                             dist1 = vector_distance(problems[id], mass_center)
                             dist2 = vector_distance(problems_2[id], mass_center)
-                            diff = (problems_2[id] - problems[id]) * 1/3
+                            diff = problems_2[id] - problems[id]
                             renge = (1/dist1) - (1/dist2)
                             if dist1 > dist2:
                                 diff = diff * -1 
                                 renge = renge * -1
-                            print(renge)
-                            # else:
-                            #     diff = diff * dist2/dist1
                             diff = diff * renge
 
                             model.user_embedding.weight.data[id] += diff
