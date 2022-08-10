@@ -98,7 +98,7 @@ def display_pca_scatterplot(ids, embeddings, category, limit=50):
 
 
     plot_figure = go.Figure(data = data, layout = layout)
-    plot_figure.write_image("images/TSNE_user_id_40000_bra_size_random_checkpoint_3.png")
+    plot_figure.write_image("images/TSNE_user_id_40000_bra_size_different_model_5.png")
     # plot_figure.show()
 
 
@@ -146,8 +146,6 @@ def main(args):
 
     # user_values = {thing.detach().numpy().tolist(): model.category_embedding(thing).detach().numpy().tolist() for batch in data_loader for thing in batch['category']}
     # print(things)
-    for batch in data_loader:
-        print(batch["user_id"])
 
     # print(len(category), len(set(category.values())))
     # for batch in data_loader:
@@ -166,7 +164,7 @@ def main(args):
     #                 print("list: ", model.user_embedding.weight.data[one] - dupa1)
     #         break
     #     break
-    # display_pca_scatterplot(list(user_values.keys()), list(user_values.values()), category, min(40000,len(user_values)))
+    display_pca_scatterplot(list(user_values.keys()), list(user_values.values()), category, min(40000,len(user_values)))
     # v1 = torch.tensor([1, 1, 1, 1, 1, 1])
     # v2 = torch.tensor([2, 3, 4, 4, 5, 6])
     # print(v1-v2, sum(v1-v2), sum(v1-v2)**2, v1*1/3*sum(v1-v2)**2)
