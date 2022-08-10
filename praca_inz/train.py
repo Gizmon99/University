@@ -127,26 +127,19 @@ def main(args):
                     problems_2 = {thing.cpu().detach().numpy().tolist(): model.user_embedding.weight.data[thing].detach().clone() for thing in batch["user_id"]}
                     lucky_number = random.choice(list(category.values()))
 
-                    # mass_center = torch.zeros(len(problems[list(problems.keys())[0]]))
-                    # mass_center = mass_center.to(device)
-                    # quantity = 0
                     points = [model.user_embedding.weight.data[id].detach().clone() for id in list(category.keys()) if category[id] == lucky_number]
-                    # for id in list(category.keys()):
-                    #     if category[id] == lucky_number:
-                    #         mass_center += model.user_embedding.weight.data[id].detach().clone()
-                    #         quantity += 1
                     mass_center = sum(points)/len(points)
 
                     for id in list(problems.keys()):
                         if category[id] != lucky_number:
                             dist1 = vector_distance(problems[id], mass_center)
                             dist2 = vector_distance(problems_2[id], mass_center)
-                            diff = problems_2[id] - problems[id]
-                            renge = (1/dist1) - (1/dist2)
+                            diff = (problems_2[id] - problems[id])/3
+                            # renge = (1/dist1) - (1/dist2)
                             if dist1 > dist2:
                                 diff = diff * -1 
-                                renge = renge * -1
-                            diff = diff * renge
+                                # renge = renge * -1
+                            # diff = diff * renge
 
                             model.user_embedding.weight.data[id] += diff
 

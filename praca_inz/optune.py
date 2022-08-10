@@ -8,9 +8,10 @@ import argparse
 import torch
 import numpy as np
 import optuna
+import random
 
 from collections import defaultdict, OrderedDict
-from utils import compute_metrics
+from utils import compute_metrics, vector_distance
 from utils import to_var, load_config_from_json
 
 from torch.utils.data import DataLoader
@@ -30,6 +31,15 @@ for split in splits:
     datasets[split] = ModCloth(data_config, split=split)
 
 
+dataset = ModCloth(data_config, split="full")
+data_loader = DataLoader(
+        dataset=dataset,
+        batch_size=model_config["trainer"]["batch_size"],
+        shuffle=False,
+)
+category = {thing.detach().numpy().tolist(): comp[2].detach().numpy().tolist() for batch in data_loader for thing, comp in zip(batch['user_id'], batch['user_numeric'])}
+
+
 def objective(trial):
     embedding_dim = trial.suggest_int("embedding_dim", 5, 20)
     dropout = trial.suggest_float("dropout", 0.0, 0.3)
@@ -39,7 +49,7 @@ def objective(trial):
         "num_category_emb" : 7,
         "num_cup_size_emb" : 12,
         "num_user_emb" : 47958,
-        "num_user_numeric": 6,
+        "num_user_numeric": 5,
         "num_item_numeric": 2,
         "user_pathway": [256, 128, 64],
         "item_pathway": [256, 128, 64],
@@ -99,10 +109,30 @@ def objective(trial):
 
                 # backward + optimization
                 if split == "train":
+                    problems = {thing.cpu().detach().numpy().tolist(): model.user_embedding.weight.data[thing].detach().clone() for thing in batch["user_id"]}
                     optimizer.zero_grad()
+                    
                     loss.backward()
                     optimizer.step()
                     step += 1
+                    problems_2 = {thing.cpu().detach().numpy().tolist(): model.user_embedding.weight.data[thing].detach().clone() for thing in batch["user_id"]}
+                    lucky_number = random.choice(list(category.values()))
+
+                    points = [model.user_embedding.weight.data[id].detach().clone() for id in list(category.keys()) if category[id] == lucky_number]
+                    mass_center = sum(points)/len(points)
+
+                    for id in list(problems.keys()):
+                        if category[id] != lucky_number:
+                            dist1 = vector_distance(problems[id], mass_center)
+                            dist2 = vector_distance(problems_2[id], mass_center)
+                            diff = (problems_2[id] - problems[id])/3
+                            # renge = (1/dist1) - (1/dist2)
+                            if dist1 > dist2:
+                                diff = diff * -1 
+                                # renge = renge * -1
+                            # diff = diff * renge
+
+                            model.user_embedding.weight.data[id] += diff
 
                 # bookkeepeing
                 loss_tracker["Total Loss"] = torch.cat(
@@ -142,12 +172,12 @@ def objective(trial):
                 target_tracker, pred_tracker
             )
 
-    return accuracy
+    return f1_score, accuracy, auc
 
 
 if __name__ == "__main__":
-    study = optuna.create_study(directions=["maximize"])
-    study.optimize(objective, n_trials=100)
+    study = optuna.create_study(directions=["maximize","maximize","maximize"])
+    study.optimize(objective, n_trials=20)
 
     trials = study.best_trials
     print("Best trials: ", trials)
