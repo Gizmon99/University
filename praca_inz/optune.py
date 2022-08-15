@@ -126,11 +126,11 @@ def objective(trial):
                             dist1 = vector_distance(problems[id], mass_center)
                             dist2 = vector_distance(problems_2[id], mass_center)
                             diff = (problems_2[id] - problems[id])/3
-                            # renge = (1/dist1) - (1/dist2)
+                            renge = (1/dist1) - (1/dist2)
                             if dist1 > dist2:
                                 diff = diff * -1 
-                                # renge = renge * -1
-                            # diff = diff * renge
+                                renge = renge * -1
+                            diff = diff * renge
 
                             model.user_embedding.weight.data[id] += diff
 
