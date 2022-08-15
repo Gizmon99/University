@@ -98,7 +98,7 @@ def display_pca_scatterplot(ids, embeddings, category, limit=50):
 
 
     plot_figure = go.Figure(data = data, layout = layout)
-    plot_figure.write_image("images/TSNE_user_id_40000_bra_size_different_model_5.png")
+    plot_figure.write_image("images/dupsko.png")
     # plot_figure.show()
 
 
@@ -148,26 +148,7 @@ def main(args):
     # print(things)
 
     # print(len(category), len(set(category.values())))
-    # for batch in data_loader:
-    #     for k, v in batch.items():
-    #         if k == "user_id":
-    #             for one in v:
-    #                 print("v:", one)
-    #                 dupa1 = model.user_embedding.weight.data[one].detach().clone()
-    #                 print("embed:", model.user_embedding(one))
-    #                 print("embed:", dupa1)
-    #                 print("embed:", model.user_embedding.weight.data[one])
-    #                 model.user_embedding.weight.data[one] = dupa1/3
-    #                 print("lmao?:", model.user_embedding(one))
-    #                 print("embed:", len(dupa1))
-    #                 print("embed:", dupa1/3)
-    #                 print("list: ", model.user_embedding.weight.data[one] - dupa1)
-    #         break
-    #     break
     display_pca_scatterplot(list(user_values.keys()), list(user_values.values()), category, min(40000,len(user_values)))
-    # v1 = torch.tensor([1, 1, 1, 1, 1, 1])
-    # v2 = torch.tensor([2, 3, 4, 4, 5, 6])
-    # print(v1-v2, sum(v1-v2), sum(v1-v2)**2, v1*1/3*sum(v1-v2)**2)
 
 if __name__ == "__main__":
 
