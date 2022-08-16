@@ -1,0 +1,710 @@
+nslookup 'computer-name' 192.168.4.168
+ssh i308939@'computer-d'
+
+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
+
+
+embeds standard tuned:
+Params:
+ embedding_dim: 20,
+ dropout: 0.03859220339148282,
+ lr: 0.0013848202147112318,
+ weight_decay: 0.00013553953774461246,
+
+    just 1/3rd
+(different testing)
+Metrics:
+ Precision = 0.573
+ Recall = 0.426
+ F1-score = 0.437
+ Accuracy = 0.697
+ AUC = 0.734
+ 
+     just 1/3rd different tuning
+Params:
+ embedding_dim: 14,
+ dropout: 0.057744291650029186,
+ lr: 0.0037964978230915426,
+ weight_decay: 0.00021857755509167674,
+
+Metrics:
+ Precision = 0.582
+ Recall = 0.414
+ F1-score = 0.423
+ Accuracy = 0.697
+ AUC = 0.729
+
+(different testing)
+Metrics:
+ Precision = 0.588
+ Recall = 0.416
+ F1-score = 0.426
+ Accuracy = 0.699
+ AUC = 0.728     
+
+
+    1/3rd and (1/diff1)-(1/diff2)
+(different testing)
+Metrics:
+ Precision = 0.568
+ Recall = 0.426
+ F1-score = 0.436
+ Accuracy = 0.696
+ AUC = 0.731
+ 
+    different tuning
+Trial nr:  0 , values:  [0.2875487426298618, 0.690673828125, 0.7114831484473925]
+Params:
+ embedding_dim: 18,
+ dropout: 0.14249567310099773,
+ lr: 0.002843803195224252,
+ weight_decay: 0.00046315385279445674,
+Trial nr:  1 , values:  [0.3421172305668773, 0.69482421875, 0.6488134914297997]
+Params:
+ embedding_dim: 19,
+ dropout: 0.0326919187685185,
+ lr: 0.001261451762842399,
+ weight_decay: 0.002029835428799237,
+Trial nr:  0 , values:  [0.3285130780372169, 0.6947021484375, 0.6659854980284468]
+Params:
+ embedding_dim: 9,
+ dropout: 0.11773677025649727,
+ lr: 0.0005684980085026577,
+ weight_decay: 0.0017583083886634973,
+Trial nr:  1 , values:  [0.29859576168088675, 0.6927490234375, 0.715017548111767]
+Params:
+ embedding_dim: 9,
+ dropout: 0.21201142016482363,
+ lr: 0.0020545284518895725,
+ weight_decay: 0.00043421299988049433,
+Trial nr:  2 , values:  [0.35834835538105875, 0.6954345703125, 0.6627075898403174]
+Params:
+ embedding_dim: 12,
+ dropout: 0.1192676182046439,
+ lr: 0.00044755525065957104,
+ weight_decay: 0.002029189562718195, 
+
+ 
+ 
+ 
+    just 1/2
+(different testing)
+Metrics:
+ Precision = 0.551
+ Recall = 0.431
+ F1-score = 0.436
+ Accuracy = 0.691
+ AUC = 0.728
+    
+    
+    just dists
+(different testing)
+Metrics:
+ Precision = 0.560
+ Recall = 0.429
+ F1-score = 0.439
+ Accuracy = 0.695
+ AUC = 0.731
+
+
+
+Standard standard
+
+Params:
+ embedding_dim: 10,
+ dropout: 0.3,
+ lr: 0.001,
+ weight_decay: 0.0001,
+
+Metrics:
+ Precision = 0.447
+ Recall = 0.354
+ F1-score = 0.314
+ Accuracy = 0.693
+ AUC = 0.726
+
+
+Standard tuned 
+ 
+ Trial nr:  0 , values:  [0.4855425003312921, 0.686767578125, 0.7310216993123989]		<--- winner?
+Params:
+ embedding_dim: 20,
+ dropout: 0.03859220339148282,
+ lr: 0.0013848202147112318,
+ weight_decay: 0.00013553953774461246,
+
+Metrics:
+ Precision = 0.565
+ Recall = 0.406
+ F1-score = 0.411	
+ Accuracy = 0.695
+ AUC = 0.735
+
+(different testing) 
+Metrics:
+ Precision = 0.573
+ Recall = 0.408
+ F1-score = 0.413
+ Accuracy = 0.697
+ AUC = 0.733
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Trial nr:  1 , values:  [0.4733118578878952, 0.6964111328125, 0.7299685617377497]
+Params:
+ embedding_dim: 17,
+ dropout: 0.0631871263998878,
+ lr: 0.0019466316424064146,
+ weight_decay: 0.000186103955486884,
+
+Metrics:
+ Precision = 0.532
+ Recall = 0.458
+ F1-score = 0.476
+ Accuracy = 0.678
+ AUC = 0.729
+
+Trial nr:  2 , values:  [0.4560898081367171, 0.7030029296875, 0.735300018041695]
+Params:
+ embedding_dim: 8,
+ dropout: 0.04242256042441478,
+ lr: 0.0008404349326329077,
+ weight_decay: 0.00017886644467055316,
+ 
+ Metrics:
+ Precision = 0.553
+ Recall = 0.423
+ F1-score = 0.427
+ Accuracy = 0.691
+ AUC = 0.735
+
+Trial nr:  3 , values:  [0.4585399173601405, 0.699462890625, 0.729348364135694]
+Params:
+ embedding_dim: 17,
+ dropout: 0.04242256042441478,
+ lr: 0.0009184823067914671,
+ weight_decay: 0.00017886644467055316,
+
+Trial nr:  4 , values:  [0.461303342722805, 0.698974609375, 0.7335556098615115]
+Params:
+ embedding_dim: 15,
+ dropout: 0.0592305675659236,
+ lr: 0.00094316271640636,
+ weight_decay: 0.00019934786689196246,
+
+Trial nr:  5 , values:  [0.4689705933558388, 0.6929931640625, 0.7319027714384045]
+Params:
+ embedding_dim: 10,
+ dropout: 0.04242256042441478,
+ lr: 0.0015687326123482368,
+ weight_decay: 0.00017886644467055316,
+
+Trial nr:  6 , values:  [0.45192861606680995, 0.7054443359375, 0.7333457244484799]
+Params:
+ embedding_dim: 17,
+ dropout: 0.04242256042441478,
+ lr: 0.0007163050707650998,
+ weight_decay: 0.00018600181521875848,
+
+ 
+NLLLoss standard
+
+Params:
+ embedding_dim: 10,
+ dropout: 0.3,
+ lr: 0.001,
+ weight_decay: 0.0001,
+
+Metrics:
+ Precision = 0.447
+ Recall = 0.354
+ F1-score = 0.314
+ Accuracy = 0.693
+ AUC = 0.726
+ 
+ 
+NLLLoss tuned
+ 
+ Trial nr:  0 , values:  [0.4759055509509767, 0.6904296875, 0.7322065303873129]
+Params:
+ embedding_dim: 16,
+ dropout: 0.06743024311420394,
+ lr: 0.000759719022705531,
+ weight_decay: 0.00015872739249334447,
+
+Metrics:
+ Precision = 0.495
+ Recall = 0.433
+ F1-score = 0.447
+ Accuracy = 0.661
+ AUC = 0.658
+ 
+Trial nr:  1 , values:  [0.4698545946908635, 0.6978759765625, 0.7351883435145027]		<--
+Params:
+ embedding_dim: 16,
+ dropout: 0.06743024311420394,
+ lr: 0.000759719022705531,
+ weight_decay: 0.00019087930703679288,
+ 
+ Metrics:
+ Precision = 0.585
+ Recall = 0.395
+ F1-score = 0.395
+ Accuracy = 0.695
+ AUC = 0.738
+ 
+Trial nr:  2 , values:  [0.45542429873246465, 0.7039794921875, 0.7340069120060807]		<--
+Params:
+ embedding_dim: 10,
+ dropout: 0.041130159544709145,
+ lr: 0.0013443990763360452,
+ weight_decay: 0.00015951313040777533,
+
+Metrics:
+ Precision = 0.570
+ Recall = 0.411
+ F1-score = 0.420
+ Accuracy = 0.694
+ AUC = 0.736
+ 
+Trial nr:  3 , values:  [0.43474766090730926, 0.7000732421875, 0.7343016831680874]
+Params:
+ embedding_dim: 16,
+ dropout: 0.06743024311420394,
+ lr: 0.0010571588645254884,
+ weight_decay: 0.00017279532411152478,
+
+Trial nr:  4 , values:  [0.4357996131263147, 0.7041015625, 0.732141587511549]
+Params:
+ embedding_dim: 8,
+ dropout: 0.005128537568908143,
+ lr: 0.0009888362592239978,
+ weight_decay: 0.00016485719180775728,
+
+Trial nr:  5 , values:  [0.4955829111689807, 0.6845703125, 0.7284285638035625]
+Params:
+ embedding_dim: 16,
+ dropout: 0.06743024311420394,
+ lr: 0.0015708877272096037,
+ weight_decay: 0.0001720759748509793,
+
+
+Additional pooling layer standard
+
+Params:
+ embedding_dim: 10,
+ dropout: 0.3,
+ lr: 0.001,
+ weight_decay: 0.0001,
+
+Metrics:
+ Precision = 0.459
+ Recall = 0.338
+ F1-score = 0.282
+ Accuracy = 0.689
+ AUC = 0.731
+ 
+ 
+Additional pooling layer tuned
+
+Trial nr:  0 , values:  [0.4269753933412967, 0.701416015625, 0.7310533081213455]
+Params:
+ embedding_dim: 8,
+ dropout: 0.018426343143574664,
+ lr: 0.0031106507632772873,
+ weight_decay: 0.00048293516651354794,
+
+Metrics:
+ Precision = 0.595
+ Recall = 0.402
+ F1-score = 0.405
+ Accuracy = 0.692
+ AUC = 0.729
+ 
+Trial nr:  1 , values:  [0.48268606116523544, 0.689697265625, 0.7282964738625392]
+Params:
+ embedding_dim: 10,
+ dropout: 0.11300247908678629,
+ lr: 0.0014498929625480887,
+ weight_decay: 0.0003917645226948014,
+
+Metrics:
+ Precision = 0.416
+ Recall = 0.373
+ F1-score = 0.347
+ Accuracy = 0.694
+ AUC = 0.731
+ 
+Trial nr:  2 , values:  [0.3694003751233657, 0.7001953125, 0.7320108925336708]
+Params:
+ embedding_dim: 6,
+ dropout: 0.06030066392886277,
+ lr: 0.001522313777630259,
+ weight_decay: 0.00019888897455531612,
+
+Trial nr:  3 , values:  [0.41891372131159677, 0.702392578125, 0.7297973764364234]
+Params:
+ embedding_dim: 6,
+ dropout: 0.0037337630868137794,
+ lr: 0.003633521275625825,
+ weight_decay: 0.0003917645226948014,
+
+Trial nr:  4 , values:  [0.44192040985427683, 0.701416015625, 0.7309647970103867]
+Params:
+ embedding_dim: 19,
+ dropout: 0.0037337630868137794,
+ lr: 0.0021788958392871096,
+ weight_decay: 0.00012135008104133174
+ 
+
+
+
+
+New dataset with both parts semi random standard:
+
+
+Params:
+ Standard
+ 
+Metrics:
+ Precision = 0.425
+ Recall = 0.350
+ F1-score = 0.307
+ Accuracy = 0.691
+ AUC = 0.715
+
+
+
+
+
+New dataset with both parts semi random:
+
+Trial nr:  0 , values:  [0.42600560238105434, 0.6937255859375, 0.7129696331121861]
+Params:
+ embedding_dim: 11,
+ dropout: 0.1158573985871682,
+ lr: 0.002147303901778369,
+ weight_decay: 2.2502481211111732e-05,
+
+Metrics:
+ Precision = 0.584
+ Recall = 0.350
+ F1-score = 0.310
+ Accuracy = 0.690
+ AUC = 0.714 
+
+Trial nr:  1 , values:  [0.43977012412803934, 0.65771484375, 0.6218153554126191]
+Params:
+ embedding_dim: 17,
+ dropout: 0.12728082484787315,
+ lr: 0.0014598365626131752,
+ weight_decay: 2.2778199860341724e-05,
+
+Metrics:
+ Precision = 0.476
+ Recall = 0.400
+ F1-score = 0.406
+ Accuracy = 0.662
+ AUC = 0.619
+ 
+Trial nr:  2 , values:  [0.4133132686388586, 0.6962890625, 0.7063544707789936]
+Params:
+ embedding_dim: 5,
+ dropout: 0.03829277138569585,
+ lr: 0.004930348250892838,
+ weight_decay: 2.2778199860341724e-05,
+Metrics:
+ Precision = 0.615
+ Recall = 0.372
+ F1-score = 0.353
+ Accuracy = 0.695
+ AUC = 0.710
+ 
+Trial nr:  3 , values:  [0.440316632879665, 0.6163330078125, 0.6245861609734215]
+Params:
+ embedding_dim: 9,
+ dropout: 0.047539573969430766,
+ lr: 0.00042555907776408895,
+ weight_decay: 2.2778199860341724e-05,
+
+Trial nr:  4 , values:  [0.4358174475082408, 0.6602783203125, 0.6465165438137808]
+Params:
+ embedding_dim: 17,
+ dropout: 0.0060223547294878665,
+ lr: 0.0017814278010405207,
+ weight_decay: 2.2778199860341724e-05,
+
+Trial nr:  5 , values:  [0.4378927543443008, 0.65576171875, 0.6289775721152006]
+Params:
+ embedding_dim: 8,
+ dropout: 0.03450019169399364,
+ lr: 0.0010894019713121978,
+ weight_decay: 2.2502481211111732e-05,
+
+Trial nr:  6 , values:  [0.40614378889376085, 0.6986083984375, 0.7175873047144002]
+Params:
+ embedding_dim: 15,
+ dropout: 0.047539573969430766,
+ lr: 0.001982680911897704,
+ weight_decay: 9.84337131894895e-05,
+ 
+Metrics:
+ Precision = 0.544
+ Recall = 0.432
+ F1-score = 0.446
+ Accuracy = 0.680
+ AUC = 0.712
+
+Trial nr:  7 , values:  [0.3898135238731677, 0.697509765625, 0.719848544738344]
+Params:
+ embedding_dim: 18,
+ dropout: 0.030726390365275656,
+ lr: 0.0014598365626131752,
+ weight_decay: 9.84337131894895e-05
+
+
+
+
+New dataset with no parts semi random standard:
+
+
+Params:
+ Standard
+ 
+Metrics:
+ Precision = 0.406
+ Recall = 0.354
+ F1-score = 0.315
+ Accuracy = 0.690
+ AUC = 0.716
+ 
+
+
+
+New dataset with no parts semi random:
+
+Trial nr:  2 , values:  [0.3153996044802397, 0.6947021484375, 0.7178413023773823]
+Params:
+ embedding_dim: 15,
+ dropout: 0.01664300072803505,
+ lr: 0.0022415907410294057,
+ weight_decay: 0.000245952717449161,
+
+Metrics:
+ Precision = 0.449
+ Recall = 0.348
+ F1-score = 0.302
+ Accuracy = 0.691
+ AUC = 0.720
+
+Trial nr:  3 , values:  [0.389307337523364, 0.691650390625, 0.7160951024748381]
+Params:
+ embedding_dim: 8,
+ dropout: 0.018270649908194346,
+ lr: 0.001697958223193443,
+ weight_decay: 0.000245952717449161,
+
+Metrics:
+ Precision = 0.571
+ Recall = 0.394
+ F1-score = 0.394
+ Accuracy = 0.690
+ AUC = 0.720
+
+Trial nr:  4 , values:  [0.3504888946440712, 0.6939697265625, 0.707565305891363]
+Params:
+ embedding_dim: 18,
+ dropout: 0.09386289257022506,
+ lr: 0.0024176580048414476,
+ weight_decay: 0.00025957240168884464,
+
+Metrics:
+ Precision = 0.431
+ Recall = 0.352
+ F1-score = 0.311
+ Accuracy = 0.692
+ AUC = 0.713
+
+
+
+
+
+
+New dataset with one part semi random standard:
+
+
+Params:
+ Standard
+ 
+Metrics:
+ Precision = 0.425
+ Recall = 0.352
+ F1-score = 0.312
+ Accuracy = 0.691
+ AUC = 0.714
+ 
+
+New dataset with one part semi random:
+
+Trial nr:  0 , values:  [0.4298425650765647, 0.6597900390625, 0.613378415411068]
+Params:
+ embedding_dim: 9,
+ dropout: 0.03362561228885238,
+ lr: 0.0003892754043037414,
+ weight_decay: 6.748003433289136e-05,
+Trial nr:  1 , values:  [0.3975183712291734, 0.6627197265625, 0.6168262355679376]
+Params:
+ embedding_dim: 11,
+ dropout: 0.009372095405589342,
+ lr: 0.0024491481266748433,
+ weight_decay: 4.2714261360938634e-05,
+Trial nr:  2 , values:  [0.35319533459315605, 0.691650390625, 0.6824068803952962]
+Params:
+ embedding_dim: 7,
+ dropout: 0.02400058148289955,
+ lr: 0.0017635589967129916,
+ weight_decay: 0.00048622731060483584,
+Trial nr:  3 , values:  [0.2716906535522287, 0.6878662109375, 0.695247411417864]
+Params:
+ embedding_dim: 13,
+ dropout: 0.13851811542566064,
+ lr: 0.003723530253151312,
+ weight_decay: 0.0004869935252839359,
+
+
+
+
+
+
+
+
+
+
+F1_score:
+
+Trial nr:  0 , values:  [0.4858915262840848]
+Params:
+ embedding_dim: 8,
+ dropout: 0.049433330146026126,
+ lr: 0.00010168860915957828,
+ weight_decay: 0.00011539738048599053,
+ 
+ 
+
+
+
+
+
+Accuraccy:
+
+Trial nr:  0 , values:  [0.70458984375]
+Params:
+ embedding_dim: 17,
+ dropout: 0.04740185000137191,
+ lr: 0.0035107903564268613,
+ weight_decay: 0.0001105385915595016,
+
+
+Trial nr:  0 , values:  [0.7008056640625]
+Params:
+ embedding_dim: 20,
+ dropout: 0.0017942096802105768,
+ lr: 0.0017667365891265528,
+ weight_decay: 0.00017068023436719274,
+
+
+Trial nr:  0 , values:  [0.6986083984375]
+Params:
+ embedding_dim: 7,
+ dropout: 0.11816495917074628,
+ lr: 0.0019145997013686488,
+ weight_decay: 1.5534880761486548e-05,
+ 
+ 
+ Trial nr:  0 , values:  [0.69970703125]
+Params:
+ embedding_dim: 8,
+ dropout: 0.007808163941419698,
+ lr: 0.001676194934989708,
+ weight_decay: 0.0001699453145492577,
+
+
+Trial nr:  0 , values:  [0.6953125]
+Params:
+ embedding_dim: 9,
+ dropout: 0.00037699487206310604,
+ lr: 0.004610743535351647,
+ weight_decay: 0.0002277459207176088,
+
+
+
+
+Diff datasets:
+
+Trial nr:  0 , values:  [0.6956758720930233]
+Params:
+ embedding_dim: 7,
+ dropout: 0.04447706038173007,
+ lr: 0.002802153376423658,
+ weight_decay: 2.523127974310025e-05,
+ 
+ 
+ Trial nr:  0 , values:  [0.6887131211180124]
+Params:
+ embedding_dim: 9,
+ dropout: 0.07800807288367315,
+ lr: 0.0015220886186330454,
+ weight_decay: 7.683920922104103e-05,
+
+
+
+
+CV:
+
+Trial nr:  0 , values:  [0.14984253875968992]
+Params:
+ embedding_dim: 12,
+ dropout: 0.001642333551208903,
+ lr: 0.0007264161872414618,
+ weight_decay: 1.5227852970043862e-05,
+ 
+
+
+
+
+
+Trial nr:  0 , values:  [0.13987403100775192]
+Params:
+ embedding_dim: 5,
+ dropout: 0.008921716026767945,
+ lr: 0.0011493902781220847,
+ weight_decay: 0.00032467552012794025,
+ 
+Metrics:
+ Precision = 0.408
+ Recall = 0.376
+ F1-score = 0.351
+ Accuracy = 0.693
+ AUC = 0.699
+  
+
+
+
+Trial nr:  0 , values:  [0.6931080426356588]
+Params:
+ embedding_dim: 8,
+ dropout: 0.16378826052550532,
+ lr: 0.001917693982256918,
+ weight_decay: 0.00035819573847502067,
+
+ 
+Trial nr:  0 , values:  [0.6919694767441861]
+Params:
+ embedding_dim: 5,
+ dropout: 0.07914376426953533,
+ lr: 0.0029562790935028214,
+ weight_decay: 9.142064254014592e-05,
