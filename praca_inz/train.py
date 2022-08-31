@@ -119,11 +119,15 @@ def main(args):
                 # backward + optimization
                 if split == "train":
                     problems = {thing.cpu().detach().numpy().tolist(): model.user_embedding.weight.data[thing].detach().clone() for thing in batch["user_id"]}
-                    optimizer.zero_grad()
                     
+                    
+                    #original loop without embeddings
+                    optimizer.zero_grad()
                     loss.backward()
                     optimizer.step()
                     step += 1
+                    
+                    
                     problems_2 = {thing.cpu().detach().numpy().tolist(): model.user_embedding.weight.data[thing].detach().clone() for thing in batch["user_id"]}
                     lucky_number = random.choice(list(category.values()))
 
@@ -135,11 +139,8 @@ def main(args):
                             dist1 = vector_distance(problems[id], mass_center)
                             dist2 = vector_distance(problems_2[id], mass_center)
                             diff = (problems_2[id] - problems[id])/3
-                            # renge = (1/dist1) - (1/dist2)
                             if dist1 > dist2:
                                 diff = diff * -1 
-                                # renge = renge * -1
-                            # diff = diff * renge
 
                             model.user_embedding.weight.data[id] += diff
 
