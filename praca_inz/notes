@@ -1,9 +1,3 @@
-nslookup 'computer-name' 192.168.4.168
-ssh i308939@'computer-d'
-
-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
-
-
 embeds standard tuned:
 Params:
  embedding_dim: 20,
