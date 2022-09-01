@@ -61,26 +61,5 @@ The above also generates tensorboard plots of training loss and validation metri
    python test.py --model `runs/<experiment_name>`
 ```
 
-### Learning Curves
-Below are some tensorboard graphs for validation metrics. 
-
-<br>
-<img src="images/tensorboard.png" width="600"/>
-<br>
-
-### Performance on Test Set
-To remove the RNG from the equasion and make the process repeatable, the random seed is chosen to be equal to 0.
-HareeshBahuleyan's model's score:
-
-| Precision| Recall  | F1-score | Accuracy |  AUC  |
-|:--------:|:-------:|:--------:|:--------:|:-----:|
-| 0.447    | 0.354   |   0.314  | 0.693    | 0.726 | 
-
-Updated model's score:
-
-#TODO
-
-*Note*: The metrics reported here are macro-average values. 
-
 ## Acknowledgements
 Thanks to Rishab Mishra for making the datasets used here publicly available on [Kaggle](https://www.kaggle.com/rmisra/clothing-fit-dataset-for-size-recommendation). The main skeleton structure and the training process of the model is highly inspired by [HareeshBahuleyan](https://github.com/HareeshBahuleyan/size-fit-net)
