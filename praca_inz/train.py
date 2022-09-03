@@ -60,7 +60,6 @@ def main(args):
 
     loss_criterion = torch.nn.CrossEntropyLoss(reduction="mean")
 
-    # SGD?
     optimizer = torch.optim.Adam(
         model.parameters(),
         lr=model_config["trainer"]["optimizer"]["lr"],
